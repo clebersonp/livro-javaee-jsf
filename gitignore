@@ -3,9 +3,9 @@
 
 ### Eclipse ###
 
-.metadata/*
-RemoteSystemsTempFiles/*
-Servers/*
+.metadata/
+RemoteSystemsTempFiles/
+Servers/
 bin/
 tmp/
 *.tmp
