@@ -27,7 +27,7 @@ public class NomesBean implements Serializable {
 	private HtmlInputText inputNome;
 	private HtmlCommandButton botaoAdicionar;
 
-	public void adicionarNome() {
+	public String adicionarNome() {
 		this.nomes.add(this.nome);
 		this.nome = "";
 		
@@ -37,7 +37,12 @@ public class NomesBean implements Serializable {
 			this.inputNome.setValue("Muitos nomes na lista...");
 			this.botaoAdicionar.setDisabled(true);
 			this.botaoAdicionar.setValue("Operação não suportada!");
+			
+			// redirecionamento para outra pagina - navegação implicita, o retorno é o nome da pagina(outcome)
+			return "ola?faces-redirect=true";
 		}
+		// para continuar na mesma pagina basta retornar null;
+		return null;
 	}
 	
 	public String getNome() {
