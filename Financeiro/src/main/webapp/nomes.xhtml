@@ -12,7 +12,9 @@
 		
 		<h:form>
 			
-			Nome: <h:inputText value="#{nomesBean.nome}" binding="#{nomesBean.inputNome}" />	
+			Nome: <h:inputText value="#{nomesBean.nome}" binding="#{nomesBean.inputNome}" 
+				onkeyup="this.value = this.value.toUpperCase();" onfocus="this.style.backgroundColor = 'yellow';"
+				onblur="this.style.backgroundColor = 'white';"/>	
 			<br/>
 			<!-- o retorno do action do botao é um outcome(nome da proxima pagina) usando a navegacao implicita.  -->
 			<h:commandButton value="Adicionar" action="#{nomesBean.adicionarNome}" binding="#{nomesBean.botaoAdicionar}" />

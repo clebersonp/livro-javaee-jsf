@@ -1,4 +1,4 @@
-package com.cleberson.bean.exemplos;
+package com.cleberson.exemplos.bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;

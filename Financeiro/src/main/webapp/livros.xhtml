@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+	<h:head>
+		<title>Componentes JSF</title>
+		<meta charset="UTF-8"/>
+	</h:head>
+	
+	<h:body>
+		<!-- adicionando css e js na pagina atraves de arquivos na biblioteca de recursos -->
+		<h:outputStylesheet library="cleberson/css" name="estilo.css" />
+		
+		<!-- target - onde quero essa importacao, nesse caso quando a pagina for renderizada a importacao ficara dentro da tag head do html -->
+		<h:outputScript library="cleberson/js" name="script.js" target="head" />
+		
+		<h:form>
+		
+			<h:panelGrid columns="2">
+				
+				<f:facet name="header">Cadastro de Livros</f:facet>
+				
+				<h:outputLabel value="Titulo: " for="titulo" />
+				<h:inputText value="#{livrosBean.novoLivro.titulo}" id="titulo" />
+
+				<h:outputLabel value="Autor: " for="autor" />
+				<h:inputText value="#{livrosBean.novoLivro.autor}" id="autor" />
+				
+				<h:outputLabel />
+				<h:commandButton value="Cadastrar" action="#{livrosBean.adicionar}" />
+				
+			</h:panelGrid>
+		
+			<br/>
+		
+			<h:dataTable value="#{livrosBean.livros}" var="livro" cellspacing="0" cellpadding="2" border="1" rendered="#{not empty livrosBean.livros}">
+				
+				<f:facet name="header">Livros Cadastrados</f:facet>
+				
+				<h:column>
+					<f:facet name="header">Titulo</f:facet>
+					<h:outputText value="#{livro.titulo}" />
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Autor</f:facet>
+					<h:outputText value="#{livro.autor}" />
+				</h:column>
+				
+			</h:dataTable>
+			
+		</h:form>
+		
+	</h:body>
+	
+</html>

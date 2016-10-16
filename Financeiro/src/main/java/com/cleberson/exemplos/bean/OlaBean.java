@@ -1,4 +1,4 @@
-package com.cleberson.bean.exemplos;
+package com.cleberson.exemplos.bean;
 
 import javax.faces.bean.ManagedBean;
 
