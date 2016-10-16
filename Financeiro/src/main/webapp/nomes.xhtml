@@ -12,14 +12,14 @@
 		
 		<h:form>
 			
-			Nome: <h:inputText value="#{nomes.nome}" />	
+			Nome: <h:inputText value="#{nomesBean.nome}" binding="#{nomesBean.inputNome}" />	
 			<br/>
-			<h:commandButton value="Adicionar" action="#{nomes.adicionarNome}" />
+			<h:commandButton value="Adicionar" action="#{nomesBean.adicionarNome}" binding="#{nomesBean.botaoAdicionar}" />
 		</h:form>
 		
 		<br/>
 		<ol>
-			<ui:repeat value="#{nomes.nomes}" var="nome" >
+			<ui:repeat value="#{nomesBean.nomes}" var="nome" >
 				<li>#{nome}</li>
 			</ui:repeat>
 		</ol>
