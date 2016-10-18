@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+	<h:head>
+		<title>Calculadora de Datas</title>
+		<meta charset="UTF-8" />
+	</h:head>
+
+	<h:body>
+		<h:form id="frm">
+			<h:messages showDetail="true" showSummary="false" />
+				
+				<h:outputLabel value="Seu nome: " for="seuNome" />
+				<h:inputText id="seuNome" size="12" value="#{calculadoraDataBean.nome}" label="Nome"
+					 required="false" >
+					<f:validateLength minimum="3" maximum="15" />
+				</h:inputText>
+			
+				<h:outputLabel value="Data Base" for="dataBase" />
+				<h:inputText size="12" value="#{calculadoraDataBean.dataBase}" id="dataBase" label="Data Base" 
+					converter="smartData" >
+					<!--  <f:convertDateTime pattern="dd/MM/yyyy" /> -->
+					<f:validator validatorId="diaUtil" />
+				</h:inputText>
+				+ 
+				<h:inputText size="10" value="#{calculadoraDataBean.dias}" label="Quantidade de dias"
+					 required="true" />
+				dias =
+				<br/>
+				<br/>	
+					
+				<h:panelGroup rendered="#{calculadoraDataBean.resultado != null}" >
+					<h:outputText value="#{calculadoraDataBean.nome}, o resultado é " />
+					<h:outputText value="#{calculadoraDataBean.resultado}" >
+						<f:convertDateTime dateStyle="full" locale="pt_BR" />
+					</h:outputText>
+					<br/>
+				</h:panelGroup>
+				<br/>
+				<h:commandButton value="Adicionar" action="#{calculadoraDataBean.adicionar}" />
+			
+		</h:form>
+	</h:body>
+
+</html>
