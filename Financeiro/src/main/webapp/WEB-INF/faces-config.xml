@@ -14,5 +14,9 @@
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
+	
+	<application>
+		<message-bundle>Messages</message-bundle>
+	</application>
 
 </faces-config>
