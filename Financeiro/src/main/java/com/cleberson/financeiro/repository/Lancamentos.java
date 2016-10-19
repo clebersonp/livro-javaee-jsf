@@ -12,6 +12,7 @@ import com.cleberson.financeiro.model.Lancamento;
  * 
  * @author Cleberson
  * Repositorio para realizar operações de banco de dados para os lançamentos
+ * @see Lancamento
  */
 public class Lancamentos implements Serializable {
 
@@ -23,9 +24,23 @@ public class Lancamentos implements Serializable {
 		this.manager = manager;
 	}
 	
+	/**
+	 * Metodo que permite retornar todos lançamentos cadastrados sem restrição
+	 * @return Lista de Lançamentos.
+	 */
 	public List<Lancamento> todos() {
 		TypedQuery<Lancamento> query = this.manager.createQuery("from Lancamento", Lancamento.class);
 		return query.getResultList();
 	}
+	
+	/**
+	 * Permite adicionar um Lancamento no banco de dados
+	 * @param lancamento
+	 */
+	public void adicionar(Lancamento lancamento) {
+		this.manager.persist(lancamento);
+	}
+	
+	
 	
 }
