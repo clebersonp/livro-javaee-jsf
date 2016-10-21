@@ -33,15 +33,15 @@
 				</h:selectOneMenu>
 				
 				<h:outputLabel value="Descrição" for="descricao" />
-				<h:inputText size="40" value="#{cadastroLancamentoBean.lancamento.descricao}" id="descricao" />
+				<h:inputText size="40" value="#{cadastroLancamentoBean.lancamento.descricao}" id="descricao" label="Descrição" />
 				
 				<h:outputLabel value="Valor" for="valor" />
-				<h:inputText size="10" value="#{cadastroLancamentoBean.lancamento.valor}" id="valor" >
+				<h:inputText size="10" value="#{cadastroLancamentoBean.lancamento.valor}" id="valor" label="Valor" >
 					<f:convertNumber minFractionDigits="2" maxFractionDigits="2" locale="pt_BR" />
 				</h:inputText>
 				
 				<h:outputLabel value="Data de vencimento" for="vencimento" />
-				<h:inputText size="10" value="#{cadastroLancamentoBean.lancamento.dataVencimento}" id="vencimento" >
+				<h:inputText size="10" value="#{cadastroLancamentoBean.lancamento.dataVencimento}" id="vencimento" label="Data de vencimento" >
 					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" />
 				</h:inputText>
 				
