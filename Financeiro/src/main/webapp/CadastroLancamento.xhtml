@@ -33,8 +33,9 @@
 				</h:selectOneMenu>
 				
 				<h:outputLabel value="Descrição" for="descricao" />
-				<h:inputText size="40" value="#{cadastroLancamentoBean.lancamento.descricao}" id="descricao" label="Descrição" />
-				
+				<h:inputText size="40" value="#{cadastroLancamentoBean.lancamento.descricao}" id="descricao" label="Descrição" 
+					valueChangeListener="#{cadastroLancamentoBean.descricaoModificada}" immediate="true" />
+							
 				<h:outputLabel value="Valor" for="valor" />
 				<h:inputText size="10" value="#{cadastroLancamentoBean.lancamento.valor}" id="valor" label="Valor" >
 					<f:convertNumber minFractionDigits="2" maxFractionDigits="2" locale="pt_BR" />
@@ -51,7 +52,8 @@
 				</h:inputText>
 				
 				<h:outputLabel />
-				<h:commandButton value="Salvar" action="#{cadastroLancamentoBean.salvar}" /> 
+				<h:commandButton value="Salvar" action="#{cadastroLancamentoBean.salvar}" 
+					actionListener="#{cadastroLancamentoBean.registrarLogCadastro}" /> 
 				
 			</h:panelGrid>
 			

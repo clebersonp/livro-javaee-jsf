@@ -7,8 +7,12 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
+import javax.faces.event.ValueChangeEvent;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+
+import org.apache.log4j.Logger;
 
 import com.cleberson.financeiro.model.Lancamento;
 import com.cleberson.financeiro.model.Pessoa;
@@ -34,7 +38,8 @@ import com.cleberson.financeiro.util.JpaUtil;
 public class CadastroLancamentoBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	private Logger log = Logger.getLogger(this.getClass().getName());
+	
 	private Lancamento lancamento = new Lancamento();
 	private List<Pessoa> todasPessoas;
 	private static final String SALVO_SUCESSO = "Lançamento salvo com sucesso!";
@@ -51,6 +56,34 @@ public class CadastroLancamentoBean implements Serializable {
 		} finally {
 			manager.close();
 		}
+	}
+	
+	/*
+	 * Esse metodo é executado sempre que houver mudança na pagina e que a pagina
+	 * sera renderizada pulando todas as outras fases do ciclo de vida do jsf por causa do renderResponse().
+	 * Os métodos de mudança de valor são chamados no final da fase Processar validações, 
+	 * antes de atribuir os valores convertidos e validados ao modelo, por isso que não consigo salvar(finalizar) o processo.
+	 * só consigo salvar o lancamento se eu preencher os campos e submeter duas vezes, ele salvara na segunda vez
+	 * pois não chama esse evento de mudança de valor
+	 * 
+	 * immediate, que quando atribuída para true, faz com que as validações, conversões
+	 * e eventos desse componente sejam executados durante a fase Aplicar valores de
+	 * requisição.
+	 */
+	public void descricaoModificada(ValueChangeEvent event) {
+		log.info("Metodo descricaoModificada; Valor antigo: " + event.getOldValue());
+		log.info("Metodo descricaoModificada; Valor nome: " + event.getNewValue());
+		FacesContext.getCurrentInstance().renderResponse();
+	}
+	
+	/*
+	 * Listener de ação são executados antes da lógica real do botão
+	 * Se eu registrar esse listener para o botão de cadastro, esse método
+	 * será executado antes do método salvar()
+	 */
+	public void registrarLogCadastro(ActionEvent event) {
+		log.info("Registro de log do cadastro de usuário. Componente: "
+							+ event.getComponent().getId());
 	}
 	
 	/**
@@ -70,6 +103,8 @@ public class CadastroLancamentoBean implements Serializable {
 			
 			context.addMessage(null, new FacesMessage(SALVO_SUCESSO));
 			
+			limparCampos();
+			
 			trx.commit();
 			
 		} catch (NegocioException e) {
@@ -79,6 +114,11 @@ public class CadastroLancamentoBean implements Serializable {
 		} finally {
 			manager.close();
 		}
+	}
+
+	private void limparCampos() {
+		this.lancamento = new Lancamento();
+		this.prepararCadastro();
 	}
 
 	public Lancamento getLancamento() {
